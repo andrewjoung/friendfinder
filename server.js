@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 
-var PORT = 3000;
+//if process.env.PORT exists that will be the host
+//if it doesn't exist then it will be 3000
+var PORT = process.env.PORT || 3000;
 
 app.get('/', function(request, response) {
     response.send("Hello world");
