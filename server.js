@@ -5,10 +5,15 @@ var app = express();
 //if it doesn't exist then it will be 3000
 var PORT = process.env.PORT || 3000;
 
-app.get('/', function(request, response) {
-    response.send("Hello world");
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.get('/', function(req, res) {
+    res.send("Some page");
 });
 
 app.listen(PORT, function(){
     console.log('listenting on ' + PORT);
 });
+
