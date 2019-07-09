@@ -1,4 +1,6 @@
 var express = require('express');
+//var htmlRoutes = require('./app/routing/htmlRoutes');
+//var apiRoutes = require('./app/routing/apiRoutes.js');
 var app = express();
 
 //if process.env.PORT exists that will be the host
@@ -9,9 +11,8 @@ var PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/', function(req, res) {
-    res.send("Some page");
-});
+var htmlRoutes = require('./app/routing/htmlRoutes')(app);
+var apiRoutes = require('./app/routing/apiRoutes')(app);
 
 app.listen(PORT, function(){
     console.log('listenting on ' + PORT);
