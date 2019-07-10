@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <h3>Question 1</h3>
-                <label for="question1">Example select</label>
+                <label for="question1">Your mind is always buzzing with unexplored ideas and plans.</label>
                 <select class="form-control" id="question1">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -54,7 +54,7 @@
 
             <div class="form-group">
                 <h3>Question 2</h3>
-                <label for="question2">Example select</label>
+                <label for="question2">You would rather go outside and spend time in nature than stay indoors.</label>
                 <select class="form-control" id="question2">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -67,7 +67,7 @@
 
             <div class="form-group">
                 <h3>Question 3</h3>
-                <label for="question3">Example select</label>
+                <label for="question3">You enjoy the sunshine over rainy and gloomy weather. </label>
                 <select class="form-control" id="question3">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -80,7 +80,7 @@
             
             <div class="form-group">
                 <h3>Question 4</h3>
-                <label for="question4">Example select</label>
+                <label for="question4">Generally speaking, you rely more on your experience than your imagination.</label>
                 <select class="form-control" id="question4">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -93,7 +93,7 @@
 
             <div class="form-group">
                 <h3>Question 5</h3>
-                <label for="question5">Example select</label>
+                <label for="question5">You find it easy to stay relaxed and focused even when there is some pressure.</label>
                 <select class="form-control" id="question5">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -106,7 +106,7 @@
 
             <div class="form-group">
                 <h3>Question 6</h3>
-                <label for="question6">Example select</label>
+                <label for="question6">You thrive in big groups and prefer being in crowds rather than smaller groups.</label>
                 <select class="form-control" id="question6">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -119,7 +119,7 @@
 
             <div class="form-group">
                 <h3>Question 7</h3>
-                <label for="question7">Example select</label>
+                <label for="question7">People can rarely upset you.</label>
                 <select class="form-control" id="question7">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -132,7 +132,7 @@
 
             <div class="form-group">
                 <h3>Question 8</h3>
-                <label for="question8">Example select</label>
+                <label for="question8">In a discussion, truth should be more important than people's sensitivities.</label>
                 <select class="form-control" id="question8">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -145,7 +145,7 @@
 
             <div class="form-group">
                 <h3>Question 9</h3>
-                <label for="question9">Example select</label>
+                <label for="question9">You rarely get acrried away by fantasies and ideas.</label>
                 <select class="form-control" id="question9">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -158,7 +158,7 @@
 
             <div class="form-group">
                 <h3>Question 10</h3>
-                <label for="question10">Example select</label>
+                <label for="question10">You would rather listen to music than sit in silence.</label>
                 <select class="form-control" id="question10">
                     <option>Please choose an option</option>
                     <option value="1">1 (Strong disagree)</option>
@@ -169,15 +169,102 @@
                 </select>
             </div>
 
+            <button type="submit" class="btn btn-primary submit" id="submitButton">Submit</button>
+
         </form>
+
+        <hr> 
+
+        <div id="friendModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h2 class="modal-title"><strong>Best Match</strong></h2>
+                </div>
+                <div class="modal-body">
+                    <h2 id="friendName"></h2>
+                    <style scree="media">
+                        #friendImg {
+                            width: 90%;
+                            height: 40%;
+                        }
+                    </style>
+                    <img id="friendImg" alt="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+        
+            </div>
+        </div>
 
         <footer class="footer">
             <div class="container">
-            <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/afhaque/friendfinder">GitHub Repo</a></p>
+            <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/andrewjoung/friendfinder">GitHub Repo</a></p>
             </div>
         </footer>
         
     </div>
-</div>
+
+    <script>
+        //when the submit button is clicked we will need to grab all the information and create a friend object to post
+        $("#submitButton").on('click', function() {
+
+            event.preventDefault();
+
+            var questionAnswers = []; //an array to hold all the values of the questions that the user answers
+
+            var username = $("#name").val();
+            var userImage = $("#photo-url").val();
+            var question1 = $("#question1").val();
+            var question2 = $("#question2").val();
+            var question3 = $("#question3").val();
+            var question4 = $("#question4").val();
+            var question5 = $("#question5").val();
+            var question6 = $("#question6").val();
+            var question7 = $("#question7").val();
+            var question8 = $("#question8").val();
+            var question9 = $("#question9").val();
+            var question10 = $("#question10").val();
+
+            //an array that we will use to test to see if all the questions have been answered
+            var answerTest = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
+
+            //if all the fields have been answered, continue with the post 
+            if(username !== "" && userImage !== "" && !answerTest.includes("Please choose an option")) {
+                //console.log("All fields have been answered");
+                for(var i = 0; i < answerTest.length; i++) {
+                    questionAnswers.push(parseInt(answerTest[i]));
+                }
+                //console.log(questionAnswers);
+                var user = {
+                    name: username,
+                    photo: userImage,
+                    scores: questionAnswers
+                };
+
+                //console.log(user);
+                $.post("/api/friends", user).then(function(data) {
+                    //alert("your information has been posted!");
+                    var compatibleFriend = data;
+
+                    $("#friendName").text(data.name);
+                    $("#friendImg").attr('src', data.photo);
+
+                    $("#friendModal").modal("toggle");
+                });
+
+            } else {
+                alert("Please complete the entire survey");
+            }
+
+
+        });
+    </script>
+
 </body>
 </html>

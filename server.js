@@ -1,6 +1,5 @@
 var express = require('express');
-//var htmlRoutes = require('./app/routing/htmlRoutes');
-//var apiRoutes = require('./app/routing/apiRoutes.js');
+
 var app = express();
 
 //if process.env.PORT exists that will be the host
