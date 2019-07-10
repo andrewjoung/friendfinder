@@ -241,6 +241,8 @@
                     questionAnswers.push(parseInt(answerTest[i]));
                 }
                 //console.log(questionAnswers);
+
+                //create a new user object and set the key/value pairs
                 var user = {
                     name: username,
                     photo: userImage,
@@ -248,14 +250,18 @@
                 };
 
                 //console.log(user);
+                //make a post to the specified api route and then execute callback function that will display the modal with the most 
+                //compatible friend
                 $.post("/api/friends", user).then(function(data) {
                     //alert("your information has been posted!");
+
+                    //the most compatible friend that is sent from the post function defined in apiRoutes.js
                     var compatibleFriend = data;
 
-                    $("#friendName").text(data.name);
-                    $("#friendImg").attr('src', data.photo);
+                    $("#friendName").text(data.name); //set the modal text to be the name of most compatible friend
+                    $("#friendImg").attr('src', data.photo); //set the img to the most compatible friend image url
 
-                    $("#friendModal").modal("toggle");
+                    $("#friendModal").modal("toggle"); //show the modal
                 });
 
             } else {

@@ -1,5 +1,6 @@
 var path = require('path');
 
+//export the necessary HTML routes that link to our home.html and survey.html files
 module.exports = function(app) {
     
     app.get('/', function(req, res) {

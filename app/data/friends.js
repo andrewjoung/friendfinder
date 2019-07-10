@@ -1,3 +1,5 @@
+//mock data that represents a list of friends that the user inpur will be compared against
+
 var friendList = [
     {
         name: "Jon Snow",
@@ -32,4 +34,5 @@ var friendList = [
 
 ];
 
+//export the list of friends
 module.exports = friendList;
